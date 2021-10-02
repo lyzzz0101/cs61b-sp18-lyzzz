@@ -1,5 +1,5 @@
 public class LinkedListDeque<T> {
-    public class Node {
+    private class Node {
         private Node prev;
         private Node next;
         private T item;
@@ -33,7 +33,7 @@ public class LinkedListDeque<T> {
         size++;
     }
 
-    public Boolean isEmpty() {
+    public boolean isEmpty() {
         return size == 0;
     }
 
@@ -57,7 +57,7 @@ public class LinkedListDeque<T> {
         }
         T res = sentinel.next.item;
         sentinel.next = sentinel.next.next;
-        sentinel.next.prev = sentinel.next;
+        sentinel.next.prev = sentinel;
         size--;
         return res;
     }

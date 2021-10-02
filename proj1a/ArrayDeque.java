@@ -19,10 +19,17 @@ public class ArrayDeque<T>{
         size++;
     }
 
-     public void addLast(T item) {
+    public void addLast(T item) {
+        if (isFull()) {
+            resize(capacity * 2);
+        }
+        T[] a = (T []) new Object[capacity];
+        System.arraycopy(items, 0, a, 0, size);
+        items = a;
         items[size] = item;
         size++;
-}
+   }
+
     public boolean isEmpty() {
         return size == 0;
     }
@@ -31,14 +38,14 @@ public class ArrayDeque<T>{
         return size;
     }
 
-    public void resize(int x) {
+    private void resize(int x) {
         T[] a = (T[]) new Object[x];
         System.arraycopy(items, 0, a, 0, size);
         items = a;
         capacity = x;
     }
 
-    public boolean isFull() {
+    private boolean isFull() {
         return size == capacity;
     }
 
@@ -84,7 +91,7 @@ public class ArrayDeque<T>{
     }
 
     public T get(int index) {
-        if (index >= size) {
+        if (index >= size || index < 0 || isEmpty()) {
             return null;
         }
         return items[index];
