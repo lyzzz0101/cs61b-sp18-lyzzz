@@ -1,4 +1,4 @@
-public class ArrayDeque<T>{
+public class ArrayDeque<T> {
     private T[] items;
     private int size;
     private int capacity = 8;
@@ -28,7 +28,7 @@ public class ArrayDeque<T>{
         items = a;
         items[size] = item;
         size++;
-   }
+    }
 
     public boolean isEmpty() {
         return size == 0;
@@ -49,6 +49,10 @@ public class ArrayDeque<T>{
         return size == capacity;
     }
 
+    private boolean isOverSpace() {
+        return size < (capacity / 2);
+    }
+
     public void printDeque() {
         for (int i = 0; i < size; i++) {
             if (i == size - 1) {
@@ -67,6 +71,9 @@ public class ArrayDeque<T>{
         if (isFull()) {
             resize(capacity * 2);
         }
+        if (isOverSpace()) {
+            resize(capacity / 2);
+        }
         T[] a = (T []) new Object[capacity];
         T res = items[0];
         System.arraycopy(items, 1, a, 0, size - 1);
@@ -81,6 +88,9 @@ public class ArrayDeque<T>{
         }
         if (isFull()) {
             resize(capacity * 2);
+        }
+        if (isOverSpace()) {
+            resize(capacity / 2);
         }
         T[] a = (T []) new Object[capacity];
         T res = items[size - 1];
